@@ -123,14 +123,12 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        attrs = {}
+        new_instance = HBNBCommand.classes[args[0]]()
         for arg in args:
             if "=" in arg:
                 key, value = arg.split("=")[0], arg.split("=")[1].strip("\"")
-                attrs[key] = value
-        print(attrs)
+                setattr(new_instance, key, value)
 
-        new_instance = HBNBCommand.classes[args[0]](**attrs)
         storage.save()
         print(new_instance.id)
         storage.save()
