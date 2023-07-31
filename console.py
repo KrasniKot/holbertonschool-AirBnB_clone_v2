@@ -127,6 +127,7 @@ class HBNBCommand(cmd.Cmd):
         for arg in args:
             if "=" in arg:
                 key, value = arg.split("=")[0], arg.split("=")[1].strip("\"")
+                value = value.replace("_", " ")
                 setattr(new_instance, key, value)
 
         storage.save()
