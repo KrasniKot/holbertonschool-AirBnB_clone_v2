@@ -4,7 +4,6 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, ForeignKey, String, Integer, Float, Table
 from sqlalchemy.orm import relationship
 from os import getenv
-from models import storage
 from models.city import City
 from models.review import Review
 from models.user import User
@@ -61,7 +60,7 @@ class Place(BaseModel, Base):
         def amenities(self):
             """Amenity getter method"""
             amenis = []
-            for amenity in storage.all(Amenity):
+            for amenity in models.storage.all(Amenity):
                 if amenity.amenity_ids == self.id:
                     amenis.append(amenity)
             return amenis

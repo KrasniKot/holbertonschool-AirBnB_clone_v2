@@ -121,5 +121,6 @@ class test_fileStorage(unittest.TestCase):
         for value in storage.all().values():
             assertNotEqual(value.id, new_id)
 
+
 if __name__ == "__main__":
     unittest.main()
