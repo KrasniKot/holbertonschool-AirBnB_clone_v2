@@ -50,23 +50,28 @@ class Place(BaseModel, Base):
         @property
         def reviews(self):
             """ Return revlist """
-            from models import engine
+            from models import storage
             revlist = []
-            for review in engine.all(Review):
+            for review in storage.all(Review):
                 if self.id == review.place_id:
                     revlist.append(review)
             return revlist
+
         @property
         def amenities(self):
             """Amenity getter method"""
+            from models import storage
+            from models.amenity import Amenity
+
             amenis = []
-            for amenity in models.storage.all(Amenity):
-                if amenity.amenity_ids == self.id:
+            for amenity in storage.all(Amenity):
+                if amenity.split(".")[1] in self.amenity_ids:
                     amenis.append(amenity)
             return amenis
 
         @amenities.setter
         def amenities(self, obj):
             """Amenity setter method"""
+            from models.amenity import Amenity
             if type(obj) == Amenity:
                 self.amenity_ids.append(obj.id)
