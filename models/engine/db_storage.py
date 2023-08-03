@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+"""Contains the DBStorage Class"""
 from os import getenv
 import MySQLdb
 from sqlalchemy import create_engine, MetaData
@@ -10,6 +12,7 @@ from models.state import State
 from models.user import User
 from models.base_model import Base
 
+
 class DBStorage:
     """ Class DBStorage"""
     __engine = None
@@ -17,13 +20,13 @@ class DBStorage:
 
     def __init__(self):
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
-        getenv('HBNB_MYSQL_USER'), getenv('HBNB_MYSQL_PWD'),
-        getenv('HBNB_MYSQL_HOST'), getenv('HBNB_MYSQL_DB')),
-        pool_pre_ping=True)
+                getenv('HBNB_MYSQL_USER'), getenv('HBNB_MYSQL_PWD'),
+                getenv('HBNB_MYSQL_HOST'), getenv('HBNB_MYSQL_DB')),
+                pool_pre_ping=True)
 
         if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(bind=self.__engine)
-    
+
     def all(self, cls=None):
         """
         Return the table or the tables.
@@ -40,9 +43,9 @@ class DBStorage:
                 if table.__name__ != 'BaseModel':
                     result = self.__session.query(table).all()
                     for x in result:
-                        info[f"{table.__class__.__name__}.{x.id}"] = x.to_dict()
+                        string = f"{table.__class__.__name__}.{x.id}"
+                        info[string] = x.to_dict()
         return info
-    
 
     def new(self, obj):
         """ Add the obj at the database"""

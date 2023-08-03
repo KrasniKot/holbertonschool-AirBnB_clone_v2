@@ -18,7 +18,6 @@ class State(BaseModel, Base):
         """Getter method"""
         from models import storage
 
-        
         listOfCities = []
         for city in storage.all(City):
             if city.state_id == self.id:

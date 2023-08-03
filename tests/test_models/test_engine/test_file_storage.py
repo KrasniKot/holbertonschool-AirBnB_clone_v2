@@ -22,7 +22,7 @@ class test_fileStorage(unittest.TestCase):
         """ Remove storage file at end of tests """
         try:
             os.remove('file.json')
-        except:
+        except Exception:
             pass
 
     def test_obj_list_empty(self):
@@ -120,3 +120,6 @@ class test_fileStorage(unittest.TestCase):
         new.delete()
         for value in storage.all().values():
             assertNotEqual(value.id, new_id)
+
+if __name__ == "__main__":
+    unittest.main()

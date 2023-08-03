@@ -27,11 +27,13 @@ class BaseModel:
                 if key != '__class__':
                     setattr(self, key, value)  # dudoso
                 elif key == 'update_at':
-                    self.updated_at = datetime.strptime(value,
-                                                             '%Y-%m-%dT%H:%M:%S.%f')
+                    self.updated_at = datetime.strptime(
+                                    value,
+                                    '%Y-%m-%dT%H:%M:%S.%f')
                 elif key == 'created_at':
-                    self.created_at = datetime.strptime(value,
-                                                         '%Y-%m-%dT%H:%M:%S.%f')
+                    self.created_at = datetime.strptime(
+                                    value,
+                                    '%Y-%m-%dT%H:%M:%S.%f')
 
     def __str__(self):
         """Returns a string representation of the instance"""
