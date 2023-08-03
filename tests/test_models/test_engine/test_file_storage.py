@@ -32,16 +32,14 @@ class test_fileStorage(unittest.TestCase):
     def test_new(self):
         """ New object is correctly added to __objects """
         new = BaseModel()
-        temp = None
-        obj = None
-        for obj in storage.all().values():
-            temp = obj
-        self.assertTrue(temp is obj)
+        key = f"{new.__class__.__name__}.{new.id}"
+        self.assertIsNotNone(storage.all()[key])
 
     def test_all(self):
         """ __objects is properly returned """
         new = BaseModel()
         temp = storage.all()
+        assertIsNotNone(temp)
         self.assertIsInstance(temp, dict)
 
     def test_base_model_instantiation(self):
@@ -68,8 +66,8 @@ class test_fileStorage(unittest.TestCase):
         new = BaseModel()
         storage.save()
         storage.reload()
-        for obj in storage.all().values():
-            loaded = obj
+        key = f"BaseModel.{new.id}"
+        loaded = storage.all()[key]
         self.assertEqual(new.to_dict()['id'], loaded.to_dict()['id'])
 
     def test_reload_empty(self):
@@ -100,11 +98,10 @@ class test_fileStorage(unittest.TestCase):
     def test_key_format(self):
         """ Key is properly formatted """
         new = BaseModel()
+        new.id = "anId"
         _id = new.to_dict()['id']
-        temp = ""
-        for key in storage.all().keys():
-            temp = key
-        self.assertEqual(temp, 'BaseModel' + '.' + _id)
+        key = 'BaseModel' + '.' + _id
+        self.assertIsNotNone(storage.all()[key])
 
     def test_storage_var_created(self):
         """ FileStorage object storage created """
