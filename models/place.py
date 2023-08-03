@@ -20,7 +20,6 @@ place_amenity = Table("place_amenity", Base.metadata, Column(
                             primary_key=True,
                             nullable=False))
 
-
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
@@ -35,44 +34,39 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     amenity_ids = []
-
-    if getenv("HBNB_TYPE_STORAGE") == "db":
-
-        amenities = relationship(
+    amenities = relationship(
                         "Amenity",
                         secondary="place_amenity",
                         viewonly=False)
-
-        reviews = relationship('Review', cascade='all, delete-orphan',
+    reviews = relationship('Review', cascade='all, delete-orphan',
                                backref='place')
 
-    else:
 
-        @property
-        def reviews(self):
-            """ Return revlist """
-            from models import storage
-            revlist = []
-            for review in storage.all(Review):
-                if self.id == review.place_id:
-                    revlist.append(review)
-            return revlist
+    @property
+    def reviews(self):
+        """ Return revlist """
+        from models import storage
+        revlist = []
+        for review in storage.all(Review):
+            if self.id == review.place_id:
+                revlist.append(review)
+        return revlist
 
-        @property
-        def amenities(self):
-            """Amenity getter method"""
-            from models import storage
-            from models.amenity import Amenity
+    @property
+    def amenities(self):
+        """Amenity getter method"""
+        from models import storage
+        from models.amenity import Amenity
 
-            amenis = []
-            for amenity in storage.all(Amenity):
-                if amenity.split(".")[1] in self.amenity_ids:
-                    amenis.append(amenity)
-            return amenis
+        amenis = []
+        for amenity in storage.all(Amenity):
+            if amenity.split(".")[1] in self.amenity_ids:
+                amenis.append(amenity)
+        return amenis
 
-        @amenities.setter
-        def amenities(self, obj):
-            """Amenity setter method"""
-            from models.amenity import Amenity
-            if type(obj) == Amenity:
-                self.amenity_ids.append(obj.id)
+    @amenities.setter
+    def amenities(self, obj):
+        """Amenity setter method"""
+        from models.amenity import Amenity
+        if type(obj) == Amenity:
+            self.amenity_ids.append(obj.id)
