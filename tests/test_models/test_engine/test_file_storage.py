@@ -2,6 +2,7 @@
 """ Module for testing file storage"""
 import unittest
 from models.base_model import BaseModel
+from models.city import City
 from models import storage
 import os
 
@@ -31,6 +32,8 @@ class test_fileStorage(unittest.TestCase):
     def test_new(self):
         """ New object is correctly added to __objects """
         new = BaseModel()
+        temp = None
+        obj = None
         for obj in storage.all().values():
             temp = obj
         self.assertTrue(temp is obj)
@@ -98,6 +101,7 @@ class test_fileStorage(unittest.TestCase):
         """ Key is properly formatted """
         new = BaseModel()
         _id = new.to_dict()['id']
+        temp = ""
         for key in storage.all().keys():
             temp = key
         self.assertEqual(temp, 'BaseModel' + '.' + _id)
@@ -107,3 +111,12 @@ class test_fileStorage(unittest.TestCase):
         from models.engine.file_storage import FileStorage
         print(type(storage))
         self.assertEqual(type(storage), FileStorage)
+
+    def test_delete(self):
+        """Created instance is removed from objects"""
+        new = City()
+        new_id = new.id
+        new.save()
+        new.delete()
+        for value in storage.all().values():
+            assertNotEqual(value.id, new_id)
