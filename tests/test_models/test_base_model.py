@@ -114,6 +114,9 @@ class test_basemodel(unittest.TestCase):
         new = BaseModel()
         self.assertTrue(issubclass(new.__class__, BaseModel), True)
 
+    def test_docs(self):
+        """Tests for docstrings"""
+        self.assertIsNotNone(BaseModel.__doc__)
 
 if __name__ == "__main__":
     unittest.main()
