@@ -32,6 +32,8 @@ class test_fileStorage(unittest.TestCase):
     def test_new(self):
         """ New object is correctly added to __objects """
         new = BaseModel()
+        storage.new(new)
+        storage.save()
         key = f"{new.__class__.__name__}.{new.id}"
         self.assertIsNotNone(storage.all()[key])
 
@@ -39,7 +41,7 @@ class test_fileStorage(unittest.TestCase):
         """ __objects is properly returned """
         new = BaseModel()
         temp = storage.all()
-        assertIsNotNone(temp)
+        self.assertIsNotNone(temp)
         self.assertIsInstance(temp, dict)
 
     def test_base_model_instantiation(self):
@@ -64,6 +66,7 @@ class test_fileStorage(unittest.TestCase):
     def test_reload(self):
         """ Storage file is successfully loaded to __objects """
         new = BaseModel()
+        storage.new(new)
         storage.save()
         storage.reload()
         key = f"BaseModel.{new.id}"
@@ -99,6 +102,8 @@ class test_fileStorage(unittest.TestCase):
         """ Key is properly formatted """
         new = BaseModel()
         new.id = "anId"
+        storage.new(new)
+        storage.save()
         _id = new.to_dict()['id']
         key = 'BaseModel' + '.' + _id
         self.assertIsNotNone(storage.all()[key])
