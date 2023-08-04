@@ -63,10 +63,9 @@ class Place(BaseModel, Base):
             """Amenity getter method"""
             from models import storage
             from models.amenity import Amenity
-
             amenis = []
-            for amenity in storage.all(Amenity):
-                if amenity.split(".")[1] in self.amenity_ids:
+            for amenity in storage.all(Amenity).values():
+                if amenity.id in self.amenity_ids:
                     amenis.append(amenity)
             return amenis
 
@@ -74,5 +73,5 @@ class Place(BaseModel, Base):
         def amenities(self, obj):
             """Amenity setter method"""
             from models.amenity import Amenity
-            if type(obj) == Amenity:
-                self.amenity_ids.append(obj.id)
+            if isinstance(obj, Amenity):
+                self.amenity_ids.append(obj.id) 
