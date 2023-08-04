@@ -34,6 +34,10 @@ class test_User(test_basemodel):
         self.assertEqual(type(self.user.first_name), str)
         self.assertEqual(type(self.user.first_name), str)
 
+    def test_type(self):
+        """Tests for the type"""
+        self.assertTrue(issubclass(self.user.__class__, User), True)
+
 
 if __name__ == "__main__":
     unittest.main()

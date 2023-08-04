@@ -94,6 +94,11 @@ class test_basemodel(unittest.TestCase):
         new.save()
         self.assertNotEqual(new.created_at, new.updated_at)
 
+    def test_type(self):
+        """Tests for the type"""
+        new = BaseModel()
+        self.assertTrue(issubclass(new.__class__, BaseModel), True)
+
 
 if __name__ == "__main__":
     unittest.main()

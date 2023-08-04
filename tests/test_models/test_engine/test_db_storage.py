@@ -20,6 +20,11 @@ class TestDBStorage(unittest.TestCase):
         self.assertTrue(hasattr(DBStorage, "delete"))
         self.assertTrue(hasattr(DBStorage, "reload"))
 
+    def test_type(self):
+        """Tests for the type"""
+        new = DBStorage()
+        self.assertTrue(issubclass(new.__class__, DBStorage), True)
+
 
 if __name__ == "__main__":
     unittest.main()

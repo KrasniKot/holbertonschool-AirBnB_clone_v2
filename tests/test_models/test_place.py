@@ -94,6 +94,11 @@ class test_Place(test_basemodel):
         self.assertEqual(type(self.place.longitude), float)
         self.assertEqual(type(self.place.amenity_ids), list)
 
+    def test_type(self):
+        """Tests for the type"""
+        new = Place()
+        self.assertTrue(issubclass(new.__class__, Place), True)
+
 
 if __name__ == "__main__":
     unittest.main()

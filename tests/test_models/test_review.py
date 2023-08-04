@@ -38,6 +38,11 @@ class test_review(test_basemodel):
         self.assertEqual(type(self.rev.place_id), str)
         self.assertEqual(type(self.rev.user_id), str)
 
+    def test_type(self):
+        """Tests for the type"""
+        new = Review()
+        self.assertTrue(issubclass(new.__class__, Review), True)
+
 
 if __name__ == "__main__":
     unittest.main()

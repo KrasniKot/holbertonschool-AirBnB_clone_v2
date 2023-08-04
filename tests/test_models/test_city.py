@@ -31,6 +31,11 @@ class test_City(test_basemodel):
         self.assertEqual(type(self.city.name), str)
         self.assertEqual(type(self.city.state_id), str)
 
+    def test_type(self):
+        """Tests for the type"""
+        new = City()
+        self.assertTrue(issubclass(new.__class__, City), True)
+
 
 if __name__ == "__main__":
     unittest.main()

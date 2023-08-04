@@ -18,6 +18,11 @@ class test_state(test_basemodel):
         new = self.value()
         self.assertTrue(hasattr(new, "name"))
 
+    def test_type(self):
+        """Tests for the type"""
+        new = State()
+        self.assertTrue(issubclass(new.__class__, State), True)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -24,6 +24,11 @@ class test_Amenity(test_basemodel):
         """tests attribute type for Amenity"""
         self.assertEqual(type(self.amenity.name), str)
 
+    def test_type(self):
+        """Tests for the type"""
+        nre = Amenity()
+        self.assertTrue(issubclass(nre.__class__, Amenity), True)
+
 
 if __name__ == "__main__":
     unittest.main()
