@@ -12,6 +12,18 @@ class test_Place(test_basemodel):
         super().__init__(*args, **kwargs)
         self.name = "Place"
         self.value = Place
+        self.place = Place()
+        self.place.city_id = "adfljk3"
+        self.place.user_id = "453ui"
+        self.place.name = "IDK"
+        self.place.description = "IDK"
+        self.place.number_rooms = 100394
+        self.place.number_bathrooms = 9
+        self.place.max_guest = 642
+        self.place.price_by_night = 21
+        self.place.latitude = 1.1
+        self.place.longitude = 10.0
+        self.place.amenity_ids = ["adfs8a7df"]
 
     def test_city_id(self):
         """Tests the attribute city_id"""
@@ -67,6 +79,20 @@ class test_Place(test_basemodel):
         """new hast amenity_ids"""
         new = self.value()
         self.assertTrue(hasattr(new, "amenity_ids"))
+
+    def test_PlaceTypes(self):
+        """Tests attribute type for Place"""
+        self.assertEqual(type(self.place.city_id), str)
+        self.assertEqual(type(self.place.user_id), str)
+        self.assertEqual(type(self.place.name), str)
+        self.assertEqual(type(self.place.description), str)
+        self.assertEqual(type(self.place.number_rooms), int)
+        self.assertEqual(type(self.place.number_bathrooms), int)
+        self.assertEqual(type(self.place.max_guest), int)
+        self.assertEqual(type(self.place.price_by_night), int)
+        self.assertEqual(type(self.place.latitude), float)
+        self.assertEqual(type(self.place.longitude), float)
+        self.assertEqual(type(self.place.amenity_ids), list)
 
 
 if __name__ == "__main__":

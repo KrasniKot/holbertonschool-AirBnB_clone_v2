@@ -27,6 +27,13 @@ class test_User(test_basemodel):
         self.assertTrue(hasattr(new, 'first_name'))
         self.assertTrue(hasattr(new, 'last_name'))
 
+    def test_UserTypes(self):
+        """tests attribute type for User"""
+        self.assertEqual(type(self.user.email), str)
+        self.assertEqual(type(self.user.password), str)
+        self.assertEqual(type(self.user.first_name), str)
+        self.assertEqual(type(self.user.first_name), str)
+
 
 if __name__ == "__main__":
     unittest.main()

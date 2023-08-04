@@ -12,6 +12,10 @@ class test_review(test_basemodel):
         super().__init__(*args, **kwargs)
         self.name = "Review"
         self.value = Review
+        self.rev = Review()
+        self.rev.place_id = "40285"
+        self.rev.user_id = "032"
+        self.rev.text = "The Text"
 
     def test_place_id(self):
         """Tests the attribute place_id"""
@@ -27,6 +31,12 @@ class test_review(test_basemodel):
         """Tests the atributte"""
         new = self.value()
         self.assertTrue(hasattr(new, "text"))
+
+    def test_ReviewTypesAttr(self):
+        """tests attribute type for Review"""
+        self.assertEqual(type(self.rev.text), str)
+        self.assertEqual(type(self.rev.place_id), str)
+        self.assertEqual(type(self.rev.user_id), str)
 
 
 if __name__ == "__main__":

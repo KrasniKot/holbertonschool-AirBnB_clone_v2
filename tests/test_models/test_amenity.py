@@ -12,11 +12,17 @@ class test_Amenity(test_basemodel):
         super().__init__(*args, **kwargs)
         self.name = "Amenity"
         self.value = Amenity
+        self.amenity = Amenity()
+        self.amenity.name = "an amenity"
 
     def test_name2(self):
         """Tests the attribute name"""
         new = self.value()
         self.assertTrue(hasattr(new, "name"))
+
+    def test_AmenityTypes(self):
+        """tests attribute type for Amenity"""
+        self.assertEqual(type(self.amenity.name), str)
 
 
 if __name__ == "__main__":

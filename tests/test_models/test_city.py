@@ -12,6 +12,9 @@ class test_City(test_basemodel):
         super().__init__(*args, **kwargs)
         self.name = "City"
         self.value = City
+        self.city = City()
+        self.city.name = "disffds"
+        self.city.state_id = "asdfklj"
 
     def test_state_id(self):
         """Tests the attribute state_id"""
@@ -22,6 +25,11 @@ class test_City(test_basemodel):
         """Tests the attribute name"""
         new = self.value()
         self.assertTrue(hasattr(new, "name"))
+
+    def test_CityTypes(self):
+        """Tests attribute type for City"""
+        self.assertEqual(type(self.city.name), str)
+        self.assertEqual(type(self.city.state_id), str)
 
 
 if __name__ == "__main__":

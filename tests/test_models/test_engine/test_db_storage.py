@@ -10,7 +10,6 @@ class TestDBStorage(unittest.TestCase):
     """Defines the tests for DBStorage"""
 
     @unittest.skipIf(getenv == ("HBNB_TYPE_STORAGE") == "file", "Won't pass")
-
     def test_ItHasAttr(self):
         """Tests for the attributes"""
         self.assertTrue(hasattr(DBStorage, "_DBStorage__engine"))
