@@ -74,4 +74,4 @@ class Place(BaseModel, Base):
             """Amenity setter method"""
             from models.amenity import Amenity
             if isinstance(obj, Amenity):
-                self.amenity_ids.append(obj.id) 
+                self.amenity_ids.append(obj.id)
