@@ -130,10 +130,6 @@ class test_basemodel(unittest.TestCase):
         """Tests for docstrings"""
         self.assertIsNotNone(BaseModel.__doc__)
 
-
-class testConsole(unittest.TestCase):
-    """Defines the tests"""
-
     def test_consoleHas(self):
         """Tests for methods"""
         self.assertTrue(hasattr(HBNBCommand, "emptyline"))
