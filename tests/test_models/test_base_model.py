@@ -102,6 +102,13 @@ class test_basemodel(unittest.TestCase):
         new.save()
         self.assertNotEqual(new.created_at, new.updated_at)
 
+    def test_BaseModelAttrs(self):
+        """Tests the attrs of BaseModel"""
+        self.assertTrue(hasattr(BaseModel, "__init__"))
+        self.assertTrue(hasattr(BaseModel, "delete"))
+        self.assertTrue(hasattr(BaseModel, "save"))
+        self.assertTrue(hasattr(BaseModel, "to_dict"))
+
     def test_type(self):
         """Tests for the type"""
         new = BaseModel()
