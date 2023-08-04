@@ -71,11 +71,22 @@ class test_basemodel(unittest.TestCase):
         self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
                          i.__dict__))
 
-    def test_to_dict(self):
+    def test_todict(self):
         """Tests to_dict() method"""
         i = self.value()
         n = i.to_dict()
         self.assertEqual(i.to_dict(), n)
+
+    def test_kwargs_none(self):
+        """Tests for None key and value"""
+        n = {None: None}
+        with self.assertRaises(TypeError):
+            new = self.value(**n)
+
+    def test_kwargs_one(self):
+        """Tests for one key"""
+        n = {'Name': 'test'}
+        new = self.value(**n)
 
     def test_id(self):
         """Tests the attribute id"""
@@ -117,6 +128,7 @@ class test_basemodel(unittest.TestCase):
     def test_docs(self):
         """Tests for docstrings"""
         self.assertIsNotNone(BaseModel.__doc__)
+
 
 if __name__ == "__main__":
     unittest.main()
