@@ -109,7 +109,7 @@ class test_basemodel(unittest.TestCase):
 
     @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == "db", "Won't pass")
     def test_save(self):
-        """test if the save works"""
+        """test if save method works"""
         new = BaseModel()
         new.save()
         self.assertNotEqual(new.created_at, new.updated_at)
