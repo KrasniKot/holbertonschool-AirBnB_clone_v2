@@ -9,7 +9,6 @@ from models.review import Review
 from models.user import User
 
 
-
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
