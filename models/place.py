@@ -8,11 +8,7 @@ from models.city import City
 from models.review import Review
 from models.user import User
 
-
-class Place(BaseModel, Base):
-    """ A place to stay """
-    __tablename__ = 'places'
-    place_amenity = Table("place_amenity", Base.metadata, Column(
+place_amenity = Table("place_amenity", Base.metadata, Column(
             "place_id",
             String(60),
             ForeignKey("places.id"),
@@ -24,6 +20,10 @@ class Place(BaseModel, Base):
                         primary_key=True,
                         nullable=False))
 
+
+class Place(BaseModel, Base):
+    """ A place to stay """
+    __tablename__ = 'places'
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     name = Column(String(128), nullable=False)
@@ -38,11 +38,13 @@ class Place(BaseModel, Base):
 
     if getenv("HBNB_TYPE_STORAGE") == "db":
 
-        reviews = relationship(
-            "Review", cascade="all, delete, delete-orphan", backref="place")
         amenities = relationship(
-            'Amenity', secondary=place_amenity,
-            viewonly=False)
+                        "Amenity",
+                        secondary="place_amenity",
+                        viewonly=False)
+
+        reviews = relationship('Review', cascade='all, delete-orphan',
+                               backref='place')
 
     else:
 
@@ -51,7 +53,7 @@ class Place(BaseModel, Base):
             """ Return revlist """
             from models import storage
             revlist = []
-            for review in storage.all(Review).values():
+            for review in storage.all(Review):
                 if self.id == review.place_id:
                     revlist.append(review)
             return revlist
