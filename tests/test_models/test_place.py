@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """This module contains unittests for Place"""
+
+import pep8
 from tests.test_models.test_base_model import test_basemodel
 from models.place import Place
 
@@ -24,6 +26,12 @@ class test_Place(test_basemodel):
         self.place.latitude = 1.1
         self.place.longitude = 10.0
         self.place.amenity_ids = ["adfs8a7df"]
+
+    def test_pep8(self):
+        """Tests pycodestyle style"""
+        style = pep8.StyleGuide(quiet=True)
+        checking = style.check_files(['models/place.py'])
+        self.assertEqual(checking.total_errors, 0, "fix pep8")
 
     def test_city_id(self):
         """Tests the attribute city_id"""

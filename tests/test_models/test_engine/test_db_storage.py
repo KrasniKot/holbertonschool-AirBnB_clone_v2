@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Contains tests for DBStorage"""
 
+import pep8
 import unittest
 from models.engine.db_storage import DBStorage
 from os import getenv
@@ -8,6 +9,12 @@ from os import getenv
 
 class TestDBStorage(unittest.TestCase):
     """Defines the tests for DBStorage"""
+
+    def test_pep8(self):
+        """Tests pycodestyle style"""
+        style = pep8.StyleGuide(quiet=True)
+        checking = style.check_files(['models/engine/db_storage.py'])
+        self.assertEqual(checking.total_errors, 0, "fix pep8")
 
     @unittest.skipIf(getenv == ("HBNB_TYPE_STORAGE") == "file", "Won't pass")
     def test_ItHasAttr(self):

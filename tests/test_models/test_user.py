@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Contains tests for User"""
+
+import pep8
 from tests.test_models.test_base_model import test_basemodel
 from models.user import User
 
@@ -15,6 +17,12 @@ class test_User(test_basemodel):
         cls.user.last_name = "Lastname"
         cls.user.email = "anEmail@gmamil.com"
         cls.user.password = "aPasSWorD"
+
+    def test_pep8(self):
+        """Tests pycodestyle style"""
+        style = pep8.StyleGuide(quiet=True)
+        checking = style.check_files(['models/user.py'])
+        self.assertEqual(checking.total_errors, 0, "fix pep8")
 
     def test_atributtes(self):
         """First name tests"""

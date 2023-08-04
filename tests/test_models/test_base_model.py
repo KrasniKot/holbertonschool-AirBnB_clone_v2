@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 """This module contains tests for BaseModel"""
+
 from models.base_model import BaseModel
 import unittest
 import datetime
 from uuid import UUID
 import json
 import os
+import pep8
 
 
 class test_basemodel(unittest.TestCase):
@@ -27,6 +29,12 @@ class test_basemodel(unittest.TestCase):
             os.remove('file.json')
         except Exception:
             pass
+
+    def test_pep8(self):
+        """Tests pycodestyle style"""
+        style = pep8.StyleGuide(quiet=True)
+        checking = style.check_files(['models/base_model.py'])
+        self.assertEqual(checking.total_errors, 0, "fix pep8")
 
     def test_default(self):
         """Tests for the type of instances"""

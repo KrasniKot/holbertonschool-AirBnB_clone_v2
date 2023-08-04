@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """This module contains unittests for City"""
+
+import pep8
 from tests.test_models.test_base_model import test_basemodel
 from models.city import City
 
@@ -15,6 +17,12 @@ class test_City(test_basemodel):
         self.city = City()
         self.city.name = "disffds"
         self.city.state_id = "asdfklj"
+
+    def test_pep8(self):
+        """Tests pycodestyle style"""
+        style = pep8.StyleGuide(quiet=True)
+        checking = style.check_files(['models/city.py'])
+        self.assertEqual(checking.total_errors, 0, "fix pep8")
 
     def test_state_id(self):
         """Tests the attribute state_id"""
