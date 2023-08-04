@@ -2,6 +2,7 @@
 """contains unittests for HBNBCommand"""
 
 import unittest
+from console import HBNBCommand
 
 
 class test_HBNBCommand(unittest.TestCase):
