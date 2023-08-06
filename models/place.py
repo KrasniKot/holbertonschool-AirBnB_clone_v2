@@ -63,8 +63,8 @@ class Place(BaseModel, Base):
             from models import storage
             from models.amenity import Amenity
             amenis = []
-            for amenity in storage.all(Amenity).values():
-                if amenity.id in self.amenity_ids:
+            for amenity in storage.all(Amenity):
+                if amenity.amenity_ids in self.id:
                     amenis.append(amenity)
             return amenis
 
