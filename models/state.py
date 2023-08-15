@@ -11,15 +11,17 @@ class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
     name = Column(String(60), nullable=False)
-    cities = relationship("City", cascade="all, delete", backref="states")
 
-    @property
-    def cities(self):
-        """Getter method"""
-        from models import storage
+    if getenv("HBNB_MYSQL_DB") == 'db':
+        cities = relationship("City", cascade="all, delete", backref="states")
+    else:
+        @property
+        def cities(self):
+            """Getter method"""
+            from models import storage
 
-        listOfCities = []
-        for city in storage.all(City):
-            if city.state_id == self.id:
-                listOfCities.append(city)
-        return listOfCities
+            listOfCities = []
+            for city in storage.all(City):
+                if city.state_id == self.id:
+                    listOfCities.append(city)
+            return listOfCities
