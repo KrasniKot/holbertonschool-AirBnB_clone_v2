@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 @app.route("/states_list", strict_slashes=False)
-def states_list():
+def statesList():
     """Displays an HTML page with a list of all States
 
     sorted by name.
@@ -19,10 +19,10 @@ def states_list():
 
 
 @app.teardown_appcontext
-def teardown(args):
+def tearDown(args):
     """Ends the current session."""
     storage.close()
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=5000)
