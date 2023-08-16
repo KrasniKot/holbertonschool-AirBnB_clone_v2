@@ -64,9 +64,9 @@ class Place(BaseModel, Base):
             from models.amenity import Amenity
             amenis = []
             for amenity in storage.all(Amenity):
-                if amenity.amenity_ids in self.id:
+                if amenity.amenity_ids == self.id:
                     amenis.append(amenity)
-            return amenis
+            return amenisi
 
         @amenities.setter
         def amenities(self, obj):
