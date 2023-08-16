@@ -12,10 +12,13 @@ def closing(var=None):
     """Ends the current session"""
     storage.close()
 
+
 @app.route("/states_list")
 def stateList():
     """Returns an html page displaying a list of states"""
-    return render_template("7-states_list.html", statess=storage.all(State).values())
+    return render_template(
+                    "7-states_list.html",
+                    statess=storage.all(State).values())
 
 
 if __name__ == "__main__":
