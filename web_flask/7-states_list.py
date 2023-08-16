@@ -19,7 +19,7 @@ def statesList():
 
 
 @app.teardown_appcontext
-def tearDown(self):
+def tearDown(arg=None):
     """Ends the current session."""
     storage.close()
 
