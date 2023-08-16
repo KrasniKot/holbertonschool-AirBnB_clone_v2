@@ -42,7 +42,7 @@ class Place(BaseModel, Base):
                         secondary="place_amenity",
                         viewonly=False)
 
-        reviews = relationship('Review', cascade='all, delete-orphan',
+        reviews = relationship('Review', cascade='all, delete',
                                backref='place')
 
     else:
