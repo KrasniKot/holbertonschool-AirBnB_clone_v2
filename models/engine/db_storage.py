@@ -33,29 +33,28 @@ class DBStorage():
 
     def all(self, cls=None):
         """Returns a dictionary"""
-        my_dict = {}
-        classes = ["BaseModel", "User", "State", "City",
-                   "Amenity", "Place", "Review"]
+        objs = {}
+        classes = {"BaseModel": BaseModel, "User":User, "State":State,
+                   "City": City, "Amenity": Amenity, "Place": Place,
+                   "Review": Review}
 
         if cls:
-            if isinstance(cls, str):
-                data = self.__session.query(eval(cls)).all()
+            if type(cls) == str:
+                for key, value in classes.items():
+                    if cls == key:
+                        instances = self.__session.query(value).all()
             else:
-                data = self.__session.query(cls).all()
-            for obj in data:
-                key = "{}.{}".format(obj.__class__.__name__, obj.id)
-                my_dict[key] = obj
+                instances = self.__session.query(cls).all()
+            for instance in instances:
+                key = f"{instance.__class__.__name__}.{instance.id}"
+                objs[key] = instance
         else:
-            data = self.__session.query(State).all()
-            data += self.__session.query(City).all()
-            data += self.__session.query(User).all()
-            data += self.__session.query(Place).all()
-            data += self.__session.query(Review).all()
-            data += self.__session.query(Amenity).all()
-            for obj in data:
-                key = "{}.{}".format(obj.__class__.__name__, obj.id)
-                my_dict[key] = obj
-        return my_dict
+            for key, value in classes.items():
+                instances += self.session.query(value).all()
+            for instance in instances:
+                key = f"{obj.__class__.__name__}.{instance.id}"
+                objs[key] = instance
+        return objs
 
     def new(self, obj):
         """Adds an object to the current session"""
