@@ -34,7 +34,7 @@ class DBStorage():
     def all(self, cls=None):
         """Returns a dictionary"""
         objs = {}
-        classes = {"BaseModel": BaseModel, "User":User, "State":State,
+        classes = {"BaseModel": BaseModel, "User": User, "State": State,
                    "City": City, "Amenity": Amenity, "Place": Place,
                    "Review": Review}
 
