@@ -4,8 +4,8 @@
         <TITLE>HBNB</TITLE>
     </HEAD>
     <BODY>
-	{%- if sid %}
-		{% for state in states if state.id == id %}
+	{% if sid -%}
+		{% for state in states if state.id == sid %}
 		<H1>State: {{ state.name }}</H1>
 		<H3>Cities:</H3>
 		<UL>
