@@ -33,27 +33,21 @@ class DBStorage():
 
     def all(self, cls=None):
         """Returns a dictionary"""
-        objs = {}
-        classes = {"BaseModel": BaseModel, "User": User, "State": State,
-                   "City": City, "Amenity": Amenity, "Place": Place,
-                   "Review": Review}
 
-        if cls:
-            if type(cls) == str:
-                for key, value in classes.items():
-                    if cls == key:
-                        instances = self.__session.query(value).all()
-            else:
-                instances = self.__session.query(cls).all()
-            for instance in instances:
-                key = f"{instance.__class__.__name__}.{instance.id}"
-                objs[key] = instance
-        else:
-            for key, value in classes.items():
-                instances += self.session.query(value).all()
-            for instance in instances:
-                key = f"{obj.__class__.__name__}.{instance.id}"
-                objs[key] = instance
+        objs = {}
+        classes = [State, City, User, Place, Review, Amenity]
+
+        if cls is None:
+            for cls in classes:
+                objects = self.__session.query(cls).all()
+                for obj in objects:
+                    key = f"{obj.__class__.__name__}.{obj.id}"
+                    objs[key] = obj
+        elif cls in classes:
+            objects = self.__session.query(cls).all()
+            for obj in objects:
+                key = f"{obj.__class__.__name__}.{obj.id}"
+                objs[key] = obj
         return objs
 
     def new(self, obj):
