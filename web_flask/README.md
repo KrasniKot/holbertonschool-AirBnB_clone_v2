@@ -25,7 +25,7 @@
 * All your classes should have documentation (python3 -c 'print(__import__("my_module").MyClass.__doc__)')
 * All your functions (inside and outside a class) should have documentation (python3 -c 'print(__import__("my_module").my_function.__doc__)' and python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)')
 
-###HTML/CSS Files
+### HTML/CSS Files
 * Allowed editors: vi, vim, emacs
 * All your files should end with a new line
 * A README.md file at the root of the folder of the project is mandatory
